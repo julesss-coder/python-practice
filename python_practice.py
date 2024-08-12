@@ -1,6 +1,6 @@
 # 7.8., 8:30 - 10:00
 # Following along to tutorial "Object Oriented Programming with Python - Full Course for Beginners", URL: https://www.youtube.com/watch?v=Ej_02ICOIgs&t=4402s
-# Continue at mark 1:04:00
+# Continue at mark 1:14:00
 
 # =====================================
 
@@ -46,7 +46,7 @@ class Item:
   # A class method does not have the `self` parameter, as it is attached to the class. Instead, it uses the `cls` (for 'class') parameter
   @classmethod
   def instantiate_from_csv(cls):
-    with open('python-practice/items.csv', 'r') as csv_file:
+    with open('./items.csv', 'r') as csv_file:
       reader = csv.DictReader(csv_file)
       items = list(reader)
 
@@ -57,10 +57,22 @@ class Item:
           quantity=int(item.get('quantity'))
         )
 
+  @staticmethod
+  def is_integer(num):
+    if isinstance(num, float):
+      return num.is_integer()
+    elif isinstance(num, int):
+      return True
+    else:
+      return False
 
-Item.instantiate_from_csv()
 
-print(Item.all)
-for item in Item.all:
-    # Prints item the way it is represented in item.__repr__
-    print(item)
+# Item.instantiate_from_csv()
+
+# print(Item.all)
+# for item in Item.all:
+#     # Prints item the way it is represented in item.__repr__
+#     print(item)
+
+print(Item.is_integer('a'))
+print(Item('laptop', 10).is_integer('a'))
