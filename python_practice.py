@@ -1,8 +1,15 @@
+# 7.8., 8:30 - 10:00
 # Following along to tutorial "Object Oriented Programming with Python - Full Course for Beginners", URL: https://www.youtube.com/watch?v=Ej_02ICOIgs&t=4402s
-# Continue at mark 38:30
+# Continue at mark 1:04:00
+
+# =====================================
+
+import csv
+
 class Item:
   # Class attributes - attributes that apply to all instances. Can be accessed from class AND instances. Instances look in their instance attributes first before looking for class attributes of the same name. 
   pay_rate = 0.8
+  all = []
 
 
   # When you instantiate a class, Python call __init__() method automatically
@@ -18,24 +25,42 @@ class Item:
     self.price = price
     self.quantity = quantity
 
+    # Actions to execute
+    Item.all.append(self)
+
   # When you call this method, Python passes the instance of the class to the method as the first argument. So, ALL methods must at least have the parameter `self`
   def calculate_total_price(self):
     return self.price * self.quantity
   
   def apply_discount(self):
-    return self.price * Item.pay_rate
+    # was ist pay_rate, wenn ich es als Instanz- und Klassenfeld habe?
+    # Erwartung: Der Wert des Instanzfeldes
+    # Realität: 100%
+    self.price = self.price * self.pay_rate
+
+  # Represent the instance in a human-readable way
+  def __repr__(self):
+    # Represent the instance the way you created it
+    return f"Item('{self.name}', {self.price}, {self.quantity})"
+
+  # A class method does not have the `self` parameter, as it is attached to the class. Instead, it uses the `cls` (for 'class') parameter
+  @classmethod
+  def instantiate_from_csv(cls):
+    with open('python-practice/items.csv', 'r') as csv_file:
+      reader = csv.DictReader(csv_file)
+      items = list(reader)
+
+    for item in items:
+        Item(
+          name=item.get('name'),
+          price=float(item.get('price')),
+          quantity=int(item.get('quantity'))
+        )
 
 
-item1 = Item("phone", 1, 3)
-item2 = Item("laptop", 300, 2)
-print(item1.name)
-print(item1.price)
-print(item1.quantity)
-print(item1.calculate_total_price())
-print("Item.pay_rate: ", Item.pay_rate)
-print("item1.pay_rate: ", item1.pay_rate)
-# Access all class attributes of this class, converted to a dictionary
-print("Item.__dict__: ", Item.__dict__)
-# Access all instance attributes of this instance, converted to a dictionary
-print("item1.__dict__: ", item1.__dict__)
+Item.instantiate_from_csv()
 
+print(Item.all)
+for item in Item.all:
+    # Prints item the way it is represented in item.__repr__
+    print(item)
