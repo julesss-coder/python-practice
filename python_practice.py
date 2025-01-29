@@ -1,4 +1,8 @@
 # 7.8., 8:30 - 10:00
+# 22.1.2025, 8:34 - 9:04, mark 23:54
+# 22.1.2025, 18:02 - 18:52, mark 47:40
+# 29.1.2025, 8:00 - 9:00, mark 59:39
+# 29.1.2025, 16:34
 # Following along to tutorial "Object Oriented Programming with Python - Full Course for Beginners", URL: https://www.youtube.com/watch?v=Ej_02ICOIgs&t=4402s
 # Continue at mark 1:14:00
 
@@ -12,10 +16,11 @@ class Item:
   all = []
 
 
-  # When you instantiate a class, Python call __init__() method automatically
+  # When you instantiate a class, Python calls __init__() method automatically
   # Use a default parameter if you don't always have objects of this type
   # Specify a data type for each parameter. (Passing in a default value signifies that the given data type is expected.)
-  def __init__(self, name: str, price: float, quantity=0):
+  # BUT type is just for documentation, does not force error
+  def __init__(self, name: str, price: float, quantity: int): # TODO Warum bekomme ich KEINE Fehlermeldung, wenn ich eine Float übergebe?
     # Validate arguments received. Add assertion error messages.
     assert price >= 0, f"Price {price} is not greater than 0!"
     assert quantity >= 0, f"Quantity {quantity} is not greater than 0!"
@@ -41,7 +46,7 @@ class Item:
   # Represent the instance in a human-readable way
   def __repr__(self):
     # Represent the instance the way you created it
-    return f"Item('{self.name}', {self.price}, {self.quantity})"
+    return f"Item:'{self.name}', {self.price}, {self.quantity}"
 
   # A class method does not have the `self` parameter, as it is attached to the class. Instead, it uses the `cls` (for 'class') parameter
   @classmethod
@@ -74,5 +79,20 @@ class Item:
 #     # Prints item the way it is represented in item.__repr__
 #     print(item)
 
-print(Item.is_integer('a'))
-print(Item('laptop', 10).is_integer('a'))
+# print(Item.is_integer('a'))
+# print(Item('laptop', 10, 10).is_integer('a'))
+print(Item(3, 22.2, 3.3))
+print(Item.all)
+
+
+class Person:
+  sex = 'female'
+
+  def __init__(self):
+    self.name = "Julia"
+
+julia = Person()
+# print(julia.name) #exp: Julia, reality 100%
+# print(Person.name) #exp: error => reality: AttributeError: type object 'Person' has no attribute 'name'
+# print(julia.__dict__) #Exp. prints instance attributes, i.e. name; reality: {'name': 'Julia'}
+# print(Person.__dict__) #Exp. prints class attributes, i.e. sex; reality: {'__module__': '__main__', 'sex': 'female', '__init__': <function Person.__init__ at 0x78d0728a6520>, '__dict__': <attribute '__dict__' of 'Person' objects>, '__weakref__': <attribute '__weakref__' of 'Person' objects>, '__doc__': None}
