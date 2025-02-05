@@ -4,7 +4,7 @@
 # 29.1.2025, 8:00 - 9:00, mark 59:39 
 # 29.1.2025, 16:34 - 17:52 - mark 1:21:13
 # 5.2.2025, 8:50-9:37, mark 1:28:45
-# 5.2.2025, 17:48 - , mark 1:51:03
+# 5.2.2025, 17:48 - 18:38, mark 1:51:03
 # Following along to tutorial "Object Oriented Programming with Python - Full Course for Beginners", URL: https://www.youtube.com/watch?v=Ej_02ICOIgs&t=4402s
 # Continue at mark 1:14:00
 
