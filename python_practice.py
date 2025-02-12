@@ -5,8 +5,8 @@
 # 29.1.2025, 16:34 - 17:52 - mark 1:21:13
 # 5.2.2025, 8:50-9:37, mark 1:28:45
 # 5.2.2025, 17:48 - 18:38, mark 1:51:03
+# 12.2.2025, 08:50 - 9:25, video finished
 # Following along to tutorial "Object Oriented Programming with Python - Full Course for Beginners", URL: https://www.youtube.com/watch?v=Ej_02ICOIgs&t=4402s
-# Continue at mark 1:14:00
 
 # =====================================
 
@@ -94,7 +94,12 @@ class Item:
 # print(Item(3, 22.2, 3.3))
 # print(Item.all)
 phone = Item('phone', 20, 5)
-# print(phone.__name) #erw.: error
+try:
+  print(phone.__name) #erw.: error
+except Exception as e:
+  print(e)
+
+
 phone.set_name = 'new name' 
 print(phone.name) #erw 'new name'
 
